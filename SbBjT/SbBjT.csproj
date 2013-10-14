@@ -32,12 +32,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Data.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Printing.v12.1.Core, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Utils.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraEditors.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraScheduler.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraScheduler.v12.1.Core, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\inves Webcam\AForge.NET Framework-2.2.5\Samples\Video\Two Cameras Test\bin\Debug\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Controls, Version=2.2.5.0, Culture=neutral, PublicKeyToken=a8ac264d1dc6b9d9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\inves Webcam\AForge.NET Framework-2.2.5\Samples\Video\Two Cameras Test\bin\Debug\AForge.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging, Version=2.2.5.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\inves Webcam\AForge.NET Framework-2.2.5\Samples\Video\Two Cameras Test\bin\Debug\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math, Version=2.2.5.0, Culture=neutral, PublicKeyToken=abba2e25397ee8c9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\inves Webcam\AForge.NET Framework-2.2.5\Samples\Video\Two Cameras Test\bin\Debug\AForge.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\inves Webcam\AForge.NET Framework-2.2.5\Samples\Video\Two Cameras Test\bin\Debug\AForge.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\inves Webcam\AForge.NET Framework-2.2.5\Samples\Video\Two Cameras Test\bin\Debug\AForge.Video.DirectShow.dll</HintPath>
+    </Reference>
     <Reference Include="GithubSharp.Core">
       <HintPath>..\packages\GithubSharp.Core.0.0.5.1\lib\GithubSharp.Core.dll</HintPath>
     </Reference>
@@ -133,6 +151,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Empresario.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AForge.Controls.dll" />
+    <Content Include="AForge.Controls.xml" />
+    <Content Include="AForge.dll" />
+    <Content Include="AForge.Imaging.dll" />
+    <Content Include="AForge.Imaging.xml" />
+    <Content Include="AForge.Math.dll" />
+    <Content Include="AForge.Math.xml" />
+    <Content Include="AForge.pdb" />
+    <Content Include="AForge.Video.DirectShow.dll" />
+    <Content Include="AForge.Video.DirectShow.pdb" />
+    <Content Include="AForge.Video.DirectShow.xml" />
+    <Content Include="AForge.Video.dll" />
+    <Content Include="AForge.Video.xml" />
+    <Content Include="AForge.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

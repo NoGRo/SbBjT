@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SbBjT.Bussines.ColorDetectorCore;
 
 namespace SbBjT.Bussines
 {
@@ -18,14 +19,37 @@ namespace SbBjT.Bussines
 
     public class Dick
     {
-
-        public List<DickPart> DickParts { get; set; }
-
-        public void FeelWhat(DickPart dickPart)
+        public Dick()
         {
-            OnFeel(dickPart);
+            lastStates = DickParts.ToDictionary(x => x.Name, x => x.IsIn);
+
+            Detector.Detection += DetectorOnDetection;
         }
 
+        private Dictionary<PartName, bool> lastStates;
+        private void DetectorOnDetection(object sender, EventArgs eventArgs)
+        {
+            foreach (DickPart dickPart in DickParts)
+            {
+                if (lastStates[dickPart.Name] != dickPart.IsIn)
+                {
+                    lastStates[dickPart.Name] = dickPart.IsIn;
+                    if (dickPart.IsIn)
+                        OnFeel(dickPart);
+                }
+            }
+        }
+
+        public Detector Detector { get; set; }
+        public List<DickPart> DickParts { get; set; }
+
+
+        
+
+
+        
+        
+        
         public event EventHandler Feel;
         protected virtual void OnFeel(DickPart dickPart)
         {

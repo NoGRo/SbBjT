@@ -5,17 +5,40 @@ namespace SbBjT.Bussines.ColorDetectorCore
     public class ColorDetector
     {
         public string Name { get; set; }
-        public Bitmap Image { get; set; }
+        public int Id { get; set; }
+        private Bitmap _image;
+        public Bitmap Image
+        {
+            get { return _image; }
+            set
+            {
+                _image = value;
+                _detected = null;
+            }
+        }
+
         public Rectangle Area { get; set; }
         public Color Color { get; set; }
-        
+
+        private bool? _detected;
+        public bool Detected
+        {
+            get
+            {
+                if (!_detected.HasValue)
+                    _detected = Detect();
+                return _detected.Value;
+            }
+            set { _detected = value; }
+        }
+
+
         private int _acurassi;
         public int Acurassi
         {
             get { return _acurassi; }
             set
             {
-
                 _acurassi = value;
                 Min = AddAcurassi(Color, -Acurassi);
                 Max = AddAcurassi(Color, Acurassi);
@@ -27,6 +50,8 @@ namespace SbBjT.Bussines.ColorDetectorCore
         private Color Min;
         private Color Max;
         
+
+
         private byte AddAcurassi(byte value, int tolerance)
         {
             int temp = value + tolerance;
@@ -46,7 +71,7 @@ namespace SbBjT.Bussines.ColorDetectorCore
             return Color.FromArgb(R, G, B);
         }
         
-        public bool Detect()
+        private bool Detect()
         {
             for (int y = Area.Y; y < Area.Height; y++)
             {

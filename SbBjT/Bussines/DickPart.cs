@@ -20,6 +20,10 @@ namespace SbBjT.Bussines
     {
         public PartName Name { get; set; }
         public int FeelPercentI { get; set; }
+        public bool IsIn
+        {
+            get { return !ColorDetector.Detected; }
+        }
         public ColorDetector ColorDetector { get; set; }
 
         public DickPart(PartName name)

@@ -20,7 +20,6 @@ namespace SbBjT.Bussines.BlowJobCore
         }
 
         public int Speed { get; set; }
-
         public Dick Dick { get; set; }
 
         private void TimerSpeedOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
@@ -41,8 +40,8 @@ namespace SbBjT.Bussines.BlowJobCore
             DickPart dickPart = ((FeelEventArgs) args).DickPart;
             if (dickPart.Name == ToDo)
             {
-                ToDo = PartName.Out;
-                if (dickPart.Name == PartName.Out)
+                ToDo = PartName.Out; // si hiso el suck no termina hasta que sale 
+                if (dickPart.Name == PartName.Out) // si se esperaba el out y lo hiso termino bien en el blow
                 {
                     TimerSpeed.Stop();
                     OnSuckOk();
