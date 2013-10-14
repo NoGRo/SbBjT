@@ -153,20 +153,20 @@
     <None Include="Resources\Empresario.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AForge.Controls.dll" />
-    <Content Include="AForge.Controls.xml" />
-    <Content Include="AForge.dll" />
-    <Content Include="AForge.Imaging.dll" />
-    <Content Include="AForge.Imaging.xml" />
-    <Content Include="AForge.Math.dll" />
-    <Content Include="AForge.Math.xml" />
-    <Content Include="AForge.pdb" />
-    <Content Include="AForge.Video.DirectShow.dll" />
-    <Content Include="AForge.Video.DirectShow.pdb" />
-    <Content Include="AForge.Video.DirectShow.xml" />
-    <Content Include="AForge.Video.dll" />
-    <Content Include="AForge.Video.xml" />
-    <Content Include="AForge.xml" />
+    <Content Include="Resources\AForge.Controls.dll" />
+    <Content Include="Resources\AForge.Controls.xml" />
+    <Content Include="Resources\AForge.dll" />
+    <Content Include="Resources\AForge.Imaging.dll" />
+    <Content Include="Resources\AForge.Imaging.xml" />
+    <Content Include="Resources\AForge.Math.dll" />
+    <Content Include="Resources\AForge.Math.xml" />
+    <Content Include="Resources\AForge.pdb" />
+    <Content Include="Resources\AForge.Video.DirectShow.dll" />
+    <Content Include="Resources\AForge.Video.DirectShow.pdb" />
+    <Content Include="Resources\AForge.Video.DirectShow.xml" />
+    <Content Include="Resources\AForge.Video.dll" />
+    <Content Include="Resources\AForge.Video.xml" />
+    <Content Include="Resources\AForge.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

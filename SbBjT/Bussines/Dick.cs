@@ -21,14 +21,18 @@ namespace SbBjT.Bussines
     {
         public Dick()
         {
-            lastStates = DickParts.ToDictionary(x => x.Name, x => x.IsIn);
-
-            Detector.Detection += DetectorOnDetection;
+            if (Detector != null)
+                Detector.Detection += DetectorOnDetection;
         }
 
         private Dictionary<PartName, bool> lastStates;
         private void DetectorOnDetection(object sender, EventArgs eventArgs)
         {
+
+            if (lastStates == null )
+                lastStates = DickParts.ToDictionary(x => x.Name, x => x.IsIn);
+
+            
             foreach (DickPart dickPart in DickParts)
             {
                 if (lastStates[dickPart.Name] != dickPart.IsIn)
@@ -44,12 +48,6 @@ namespace SbBjT.Bussines
         public List<DickPart> DickParts { get; set; }
 
 
-        
-
-
-        
-        
-        
         public event EventHandler Feel;
         protected virtual void OnFeel(DickPart dickPart)
         {

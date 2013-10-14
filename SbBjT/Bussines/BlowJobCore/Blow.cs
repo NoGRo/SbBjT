@@ -6,7 +6,8 @@ namespace SbBjT.Bussines.BlowJobCore
     public class Blow
     {
         public Timer TimerSpeed = new Timer();
-        private PartName ToDo;
+        private PartName ToDoPart;
+        private bool ToDoIn;
 
         public Blow(Dick dick, int speed)
         {
@@ -27,9 +28,15 @@ namespace SbBjT.Bussines.BlowJobCore
             OnSuckFail();
         }
 
-        public void Do(PartName SuckState)
+        public void Do(PartName partName)
         {
-            ToDo = SuckState;
+            Do(partName, true);
+        }
+
+        public void Do(PartName partName, bool putIn)
+        {
+            ToDoPart = partName;
+            ToDoIn = putIn;
 
             TimerSpeed.Stop();
             TimerSpeed.Start();
@@ -38,20 +45,20 @@ namespace SbBjT.Bussines.BlowJobCore
         private void OnDickFeel(object sender, EventArgs args)
         {
             DickPart dickPart = ((FeelEventArgs) args).DickPart;
-            if (dickPart.Name == ToDo)
+
+            if (dickPart.Name == ToDoPart && dickPart.IsIn == ToDoIn)
             {
-                ToDo = PartName.Out; // si hiso el suck no termina hasta que sale 
-                if (dickPart.Name == PartName.Out) // si se esperaba el out y lo hiso termino bien en el blow
+                if (dickPart.Name == PartName.Tip && !dickPart.IsIn) // si se esperaba el out y lo hiso termino bien en el blow
                 {
                     TimerSpeed.Stop();
                     OnSuckOk();
                 }
                 else
-                {
+                { 
+                    Do(PartName.Tip, false); 
                     OnSuckProcess();
                 }
-                TimerSpeed.Stop();
-                TimerSpeed.Start();
+                
             }
         }
 

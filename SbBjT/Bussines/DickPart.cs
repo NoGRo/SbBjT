@@ -9,7 +9,7 @@ namespace SbBjT.Bussines
 {
     public enum PartName
     {
-        Out,
+        Tip,
         Medium,
         Deep,
         RealyDeep,
@@ -19,8 +19,7 @@ namespace SbBjT.Bussines
     public class DickPart
     {
         public PartName Name { get; set; }
-        public int FeelPercentI { get; set; }
-        public bool IsIn
+        public bool IsIn    
         {
             get { return !ColorDetector.Detected; }
         }
