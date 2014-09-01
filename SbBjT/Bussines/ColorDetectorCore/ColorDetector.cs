@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using Newtonsoft.Json;
 namespace SbBjT.Bussines.ColorDetectorCore
 {
@@ -131,17 +132,45 @@ namespace SbBjT.Bussines.ColorDetectorCore
         }
         public void Paint(Color color)
         {
+            if (Area.Bottom==0) return;
+            BitmapData _bmp = Image.LockBits(Area, ImageLockMode.ReadWrite, Image.PixelFormat);
+
+            unsafe
+            {
+                int _pixelSize = 3;
+                byte* _current = (byte*) (void*) _bmp.Scan0;
+                int _nWidth = _bmp.Width*_pixelSize;
+                int _nHeight = _bmp.Height;
+
+                
+                for (int y =0; y < _nHeight; y++)
+                {
+                    for (int x =0; x < _nWidth;x++ )
+                    {
+                         if (x % _pixelSize ==0|| x ==0)
+                        {
+                             
+                         }
+                      _current++;
+                     }
+                }
+            }
+
+            
+
+            return;
             for (int y = Area.Y; y < Area.Y +Area.Height; y++)
             {
                 for (int x = Area.X; x < Area.X + Area.Width; x++)
                 {
                     Color pix = Image.GetPixel(x, y);
-                    if ((pix.R >= Min.R && pix.R <= Max.R)
-                        && (pix.G >= Min.G && pix.G <= Max.G)
-                        && (pix.B >= Min.B && pix.B <= Max.B))
-                    {
+
+                    float avghue = (pix.GetHue() + _color.GetHue())/2;
+                    float distance = Math.Abs(_color.GetHue() - avghue);
+                    
+                    if (distance < Acurassi)
                         Image.SetPixel(x, y, color);
-                    }
+                    
                 }
             }
         }

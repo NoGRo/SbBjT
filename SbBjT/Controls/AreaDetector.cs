@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Data;
@@ -14,9 +15,10 @@ using SbBjT.Bussines;
 namespace SbBjT.Controls
 {
 
+    
     public partial class AreaDetector : UserControl
     {
-
+        
         private bool Pickcolor = false;
         public Detector Detector;
         public bool Paint = true;
@@ -28,6 +30,7 @@ namespace SbBjT.Controls
 
         public AreaDetector()
         {
+
             InitializeComponent();
         }
         private void AreaDetector_Load(object sender, EventArgs e)
@@ -81,6 +84,8 @@ namespace SbBjT.Controls
         }
 
         private bool isMouseDown;
+
+        
 
 
         public void start()
