@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Media;
 using System.Windows.Forms;
+using WMPLib;
 
 namespace SbBjT.Bussines.VoiceCore
 {
@@ -13,13 +14,24 @@ namespace SbBjT.Bussines.VoiceCore
         public string Name { get; set; }
         public string FolderName { get; set; }
         private Dictionary<Say,SaySound> SaySounds = new Dictionary<Say, SaySound>();
-        private SoundPlayer Player = new SoundPlayer();
-
+        private List<SoundPlayer> Players = new List<SoundPlayer>();
+        WindowsMediaPlayer player = new WMPLib.WindowsMediaPlayer();
+        private int lastuse = 0;
         public void Talk(Say say)
         {
-            Player.Stop();
-            Player.SoundLocation = GetSayPath(say);
-            Player.Play();
+
+            
+            
+            //player.URL = GetSayPath(say);
+            Players[0].SoundLocation = GetSayPath(say);
+            Players[0].Play();
+
+            /*
+            lastuse = lastuse == 0 ? 1 : 0;
+            SoundPlayer Playtemp = Players[lastuse];
+            Playtemp.Stop();
+            Playtemp.SoundLocation = GetSayPath(say);*/
+
         }
 
         private string GetSayPath(Say say)
@@ -44,6 +56,8 @@ namespace SbBjT.Bussines.VoiceCore
         {
             Name = name;
             FolderName = folderName;
+            Players.Add(new SoundPlayer());
+            ;
 
             string path = Application.StartupPath;
             path = path + "\\Voices\\" + FolderName + "\\";

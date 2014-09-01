@@ -7,6 +7,11 @@ namespace SbBjT.Bussines.PunishCore
 {
     public class PunishMulti : IPunish
     {
+        public PunishMulti()
+        {
+            Punishes = new List<IPunish>();
+        }
+
         public bool Randomize { get; set; }
         public List<IPunish> Punishes { get; set; }
         public void Punish()

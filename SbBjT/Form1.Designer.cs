@@ -29,82 +29,64 @@
         /// </summary>
         private void InitializeComponent()
         {
-            SbBjT.Bussines.Duration duration1 = new SbBjT.Bussines.Duration();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.areaDetector1 = new SbBjT.Controls.AreaDetector();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.durSuck = new SbBjT.Controls.DurationSelect();
-            this.videoSourcePlayer1 = new AForge.Controls.VideoSourcePlayer();
-            this.camera1Combo = new System.Windows.Forms.ComboBox();
+            this.lblLeft = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(12, 559);
+            this.trackBar1.Maximum = 100;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(372, 45);
+            this.trackBar1.TabIndex = 8;
+            this.trackBar1.Value = 20;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // areaDetector1
+            // 
+            this.areaDetector1.Location = new System.Drawing.Point(12, 12);
+            this.areaDetector1.Name = "areaDetector1";
+            this.areaDetector1.Size = new System.Drawing.Size(654, 530);
+            this.areaDetector1.TabIndex = 7;
+            this.areaDetector1.Load += new System.EventHandler(this.areaDetector1_Load);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(445, 470);
+            this.button1.Location = new System.Drawing.Point(390, 581);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
+            this.button1.TabIndex = 9;
             this.button1.Text = "Start";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox1
+            // lblLeft
             // 
-            this.textBox1.Location = new System.Drawing.Point(371, 424);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(324, 20);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
-            // 
-            // durSuck
-            // 
-            duration1.Max = 0;
-            duration1.Min = 0;
-            duration1.Randomize = false;
-            duration1.Value = 0;
-            this.durSuck.Duration = duration1;
-            this.durSuck.Location = new System.Drawing.Point(195, 470);
-            this.durSuck.Metric = "Value:";
-            this.durSuck.Name = "durSuck";
-            this.durSuck.ShowMax = true;
-            this.durSuck.ShowRandom = true;
-            this.durSuck.Size = new System.Drawing.Size(207, 78);
-            this.durSuck.TabIndex = 2;
-            this.durSuck.Title = "Sucks";
-            // 
-            // videoSourcePlayer1
-            // 
-            this.videoSourcePlayer1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.videoSourcePlayer1.ForeColor = System.Drawing.Color.White;
-            this.videoSourcePlayer1.Location = new System.Drawing.Point(12, 39);
-            this.videoSourcePlayer1.Name = "videoSourcePlayer1";
-            this.videoSourcePlayer1.Size = new System.Drawing.Size(459, 324);
-            this.videoSourcePlayer1.TabIndex = 5;
-            this.videoSourcePlayer1.VideoSource = null;
-            // 
-            // camera1Combo
-            // 
-            this.camera1Combo.FormattingEnabled = true;
-            this.camera1Combo.Location = new System.Drawing.Point(12, 12);
-            this.camera1Combo.Name = "camera1Combo";
-            this.camera1Combo.Size = new System.Drawing.Size(322, 21);
-            this.camera1Combo.TabIndex = 6;
-            this.camera1Combo.SelectedIndexChanged += new System.EventHandler(this.camera1Combo_SelectedIndexChanged);
+            this.lblLeft.AutoSize = true;
+            this.lblLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLeft.Location = new System.Drawing.Point(488, 559);
+            this.lblLeft.Name = "lblLeft";
+            this.lblLeft.Size = new System.Drawing.Size(0, 73);
+            this.lblLeft.TabIndex = 10;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(835, 620);
-            this.Controls.Add(this.camera1Combo);
-            this.Controls.Add(this.videoSourcePlayer1);
-            this.Controls.Add(this.durSuck);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(884, 765);
+            this.Controls.Add(this.lblLeft);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.areaDetector1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,11 +94,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
         private Controls.DurationSelect durSuck;
-        private AForge.Controls.VideoSourcePlayer videoSourcePlayer1;
-        private System.Windows.Forms.ComboBox camera1Combo;
+        private Controls.AreaDetector areaDetector1;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblLeft;
+  
 
 
     }

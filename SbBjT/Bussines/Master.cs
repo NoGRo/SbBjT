@@ -22,15 +22,15 @@ namespace SbBjT.Bussines
         public BlowJob GetBlowJob()
         {
 
-            BlowJobType blowJobType = Personality.BlowJobType;
-            blowJobType.Rest.Have = false;
-            blowJobType.Speed.Value = 3;
+            //BlowJobType blowJobType = Personality.BlowJobType;
+            //blowJobType.Rest.Have = false;
+            //blowJobType.Speed.Value = 3;
             //blowJobType.Sucks.Value = 20;
 
             BlowJob blowJob = new BlowJob(this,new Slave());
             // Punishes.Add(new PunishSuckIncrease(this, new Duration(2)));
 
-            blowJob.Start();
+           
             return blowJob;
 
         }  

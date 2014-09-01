@@ -6,108 +6,192 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using SbBjT.Bussines;
 using SbBjT.Bussines.ColorDetectorCore;
 using SbBjT.Bussines.BlowJobCore;
+using SbBjT.Bussines.PunishCore;
 using SbBjT.Bussines.VoiceCore;
 using AForge.Video;
 using AForge.Video.DirectShow;
+using Newtonsoft.Json;
 
 namespace SbBjT
 {
     public partial class Form1 : Form
     {
+        #region Reg help
+        public bool RegWrite(string KeyName, object Value)
+        {
+            try
+            {
+                // Setting
+                RegistryKey rk = Registry.CurrentUser;
+                // I have to use CreateSubKey 
+                // (create or open it if already exits), 
+                // 'cause OpenSubKey open a subKey as read-only
+                RegistryKey sk1 = rk.CreateSubKey("SOFTWARE\\" + Application.ProductName);
+                // Save the value
+                sk1.SetValue(KeyName.ToUpper(), Value);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                // AAAAAAAAAAARGH, an error!
+                return false;
+            }
+        }
+        public string RegRead(string KeyName)
+        {
+            // Opening the registry key
+            RegistryKey rk = Registry.CurrentUser;
+            // Open a subKey as read-only
+            RegistryKey sk1 = rk.OpenSubKey("SOFTWARE\\" + Application.ProductName);
+            // If the RegistrySubKey doesn't exist -> (null)
+            if (sk1 == null)
+            {
+                return null;
+            }
+            else
+            {
+                try
+                {
+                    // If the RegistryKey exists I get its value
+                    // or null is returned.
+                    return (string)sk1.GetValue(KeyName.ToUpper());
+                }
+                catch (Exception e)
+                {
+                    // AAAAAAAAAAARGH, an error!
+
+                    return null;
+                }
+            }
+        }
+        #endregion
         Master master = new Master();
+        private BlowJob blowJob = null;
         FilterInfoCollection videoDevices;
         public Form1()
         {
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             InitializeComponent();
 
-            try
-            {
-                // enumerate video devices
-                videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
-                if (videoDevices.Count == 0)
-                {
-                    throw new Exception();
-                }
+            #region combo camaras
 
-                for (int i = 1, n = videoDevices.Count; i <= n; i++)
-                {
-                    string cameraName = i + " : " + videoDevices[i - 1].Name;
 
-                    camera1Combo.Items.Add(cameraName);
-                }
+            //try
+            //{
+            //    // enumerate video devices
+            //    videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
-                camera1Combo.SelectedIndex = 0;
-            }
-            catch
-            {
-                camera1Combo.Items.Add("No cameras found");
+            //    if (videoDevices.Count == 0)
+            //    {
+            //        throw new Exception();
+            //    }
 
-                camera1Combo.SelectedIndex = 0;
+            //    for (int i = 1, n = videoDevices.Count; i <= n; i++)
+            //    {
+            //        string cameraName = i + " : " + videoDevices[i - 1].Name;
 
-                camera1Combo.Enabled = false;
-            }
+            //        camera1Combo.Items.Add(cameraName);
+            //    }
+
+            //    camera1Combo.SelectedIndex = 0;
+            //}
+            //catch
+            //{
+            //    camera1Combo.Items.Add("No cameras found");
+
+            //    camera1Combo.SelectedIndex = 0;
+
+            //    camera1Combo.Enabled = false;
+            //}
+
+            #endregion
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            master.Voice = new Voice("Woman", "Woman");
-            master.Dick = new Dick();
-           
+            master.Voice = new Voice("Beep", "Beep");
+            
+            areaDetector1.Detector = JsonConvert.DeserializeObject<Detector>(RegRead("Detector"));
+
+            areaDetector1.start();
+
+            /*
+             *             Dick = new Dick(Detector);
+                
+            var cd = new ColorDetector(Detector);
+            Dick.DickParts.Add(new DickPart(PartName.Tip, cd));
+            cd = new ColorDetector(Detector);
+            Dick.DickParts.Add(new DickPart(PartName.Medium, cd));
+            cd = new ColorDetector(Detector);
+            Dick.DickParts.Add(new DickPart(PartName.Deep, cd));
+            cd = new ColorDetector(Detector);
+            Dick.DickParts.Add(new DickPart(PartName.RealyDeep, cd));
+             */
+
+
+
+
         }
 
 
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            
            
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+
+
+
+        private void areaDetector1_Load(object sender, EventArgs e)
         {
 
-            VideoCaptureDevice videoSource1 = new VideoCaptureDevice(videoDevices[camera1Combo.SelectedIndex].MonikerString);
-            //videoSource1.DesiredFrameRate = 10;
+        }
 
-            videoSourcePlayer1.VideoSource = videoSource1;
-            //videoSourcePlayer1.Start();
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            areaDetector1.Detector.Accurasi = (byte)trackBar1.Value;
+        }
 
-            Detector detector = new Detector();
-            detector.Video = videoSource1;
-            detector.Start();
+        private void button1_Click(object sender, EventArgs e)
+        {
+            areaDetector1.Paint = false;
+            RegWrite("Detector", JsonConvert.SerializeObject(areaDetector1.Detector));
             
-            /*
-            master.Personality =  new Personality();
-            master.Personality.BlowJobType=  new BlowJobType();
-            master.Personality.BlowJobType.Sucks = durSuck.Duration;
+            master.Dick = areaDetector1.Dick;
+            master.Personality =  new Personality()
+                {
+                    BlowJobType=new BlowJobType()
+                        {
+                            Rest= new Rest(){Have=false},
+                            Speed = new Duration(3),
+                            Sucks = new Duration(40),
+                            Behavior = new EveryRandom(3,10,PartName.Deep)
+                        }
+                };
 
-            BlowJob blowJob = master.GetBlowJob();
-            
+            blowJob = master.GetBlowJob();
+            //blowJob.Punish.Punishes.Add(new PunishSuckDo(blowJob,PartName.RealyDeep));
+            blowJob.Punish.Punishes.Add(new PunishSuckIncrease(blowJob,new Duration(1,5)));
+
+            blowJob.SuckLeftChange += BlowJobOnSuckLeftChange;
+
             blowJob.Start();
-            */
+
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void BlowJobOnSuckLeftChange(object sender, EventArgs eventArgs)
         {
-
+            //lblLeft.Text = blowJob.SucksLeft.ToString();
         }
-
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-     
-        }
-
-     
-        
-        private void camera1Combo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
     }
     
 }

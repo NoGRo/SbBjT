@@ -9,6 +9,10 @@ namespace SbBjT.Bussines.VoiceCore
     {
         [StringValue("GoDeep")] 
         GoDeep,
+        [StringValue("GoRealyDeep")]
+        GoRealyDeep,
+        [StringValue("LickBalls")]
+        LickBalls,
         [StringValue("Go")]
         Go,
         [StringValue("GoodSlave")]

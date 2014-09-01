@@ -21,8 +21,13 @@ namespace SbBjT.Bussines
     {
         public Dick()
         {
-            if (Detector != null)
-                Detector.Detection += DetectorOnDetection;
+        }
+
+        public Dick(Detector detector)
+        {
+            Detector = detector;
+            Detector.Detection += DetectorOnDetection;
+            DickParts =  new List<DickPart>();
         }
 
         private Dictionary<PartName, bool> lastStates;
@@ -35,6 +40,8 @@ namespace SbBjT.Bussines
             
             foreach (DickPart dickPart in DickParts)
             {
+                if (!dickPart.IsIn)
+                    dickPart.Name = dickPart.Name;
                 if (lastStates[dickPart.Name] != dickPart.IsIn)
                 {
                     lastStates[dickPart.Name] = dickPart.IsIn;

@@ -6,7 +6,7 @@ namespace SbBjT.Bussines.BlowJobCore
     public class Blow
     {
         public Timer TimerSpeed = new Timer();
-        private PartName ToDoPart;
+        public PartName ToDoPart { get; private set; }
         private bool ToDoIn;
 
         public Blow(Dick dick, int speed)
@@ -48,14 +48,14 @@ namespace SbBjT.Bussines.BlowJobCore
 
             if (dickPart.Name == ToDoPart && dickPart.IsIn == ToDoIn)
             {
-                if (dickPart.Name == PartName.Tip && !dickPart.IsIn) // si se esperaba el out y lo hiso termino bien en el blow
+                if (dickPart.Name == PartName.Tip && dickPart.IsIn) // si se esperaba el out y lo hiso termino bien en el blow
                 {
                     TimerSpeed.Stop();
                     OnSuckOk();
                 }
                 else
                 { 
-                    Do(PartName.Tip, false); 
+                    Do(PartName.Tip, true); 
                     OnSuckProcess();
                 }
                 

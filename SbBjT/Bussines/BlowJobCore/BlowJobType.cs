@@ -5,16 +5,18 @@ namespace SbBjT.Bussines.BlowJobCore
 {
     public class BlowJobType
     {
+ 
 
         public bool RandomizePunishes { get; set; }
         public PunishMulti Punish { get; set; }
-
+        public IBlowJobBehavior Behavior { get; set; }
         
         public Rest Rest { get; set; }
         
         public Duration Time { get; set; }
         public Duration Sucks { get; set; }
         public Duration Speed { get; set; }
+
         public BlowJobType()
         {
             Time= new Duration();
