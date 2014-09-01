@@ -147,15 +147,21 @@ namespace SbBjT.Bussines.ColorDetectorCore
                 {
                     for (int x =0; x < _nWidth;x++ )
                     {
-                         if (x % _pixelSize ==0|| x ==0)
-                        {
-                             
+                         if (x % _pixelSize == 0|| x == 0)
+                         {
+                             float huePix = Color.FromArgb(255, _current[0], _current[1], _current[2]).GetHue();
+                             if (Math.Abs(huePix - _color.GetHue()) < Acurassi)
+                             {
+                                 _current[0] = color.R;
+                                 _current[1] = color.G;
+                                 _current[2] = color.B;
+                             }
                          }
                       _current++;
                      }
                 }
             }
-
+            Image.UnlockBits(_bmp);
             
 
             return;
