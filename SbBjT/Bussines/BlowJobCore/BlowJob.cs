@@ -10,7 +10,7 @@ namespace SbBjT.Bussines.BlowJobCore
         public BlowJobType BlowJobType { get; set; }
         public Master Master { get; set; }
         public Slave Slave { get; set; }
-        public PunishMulti Punish { get; set; }
+        public IPunish Punish { get; set; }
         private Blow blow;
         private DateTime StartTime;
         private int _sucksLeft;
@@ -31,24 +31,25 @@ namespace SbBjT.Bussines.BlowJobCore
         public List<PartName> History { get; set; }
         private int SucksLeftToRest { get; set; }
         private PartName? Next;
-        
+
         public BlowJob(Master master, Slave slave)
         {
 
-            Punish = new PunishMulti(); 
+            Punish = new PunishMulti();
             Master = master;
-            History =  new List<PartName>();
+            History = new List<PartName>();
             BlowJobType = Master.Personality.BlowJobType;
             SucksLeft = BlowJobType.Sucks.Value;
             if (BlowJobType.Rest.Have)
                 SucksLeftToRest = BlowJobType.Rest.SuckToRest.Value;
-        
-            if (BlowJobType.Behavior != null) 
+
+            if (BlowJobType.Behavior != null)
                 BlowJobType.Behavior.BlowJob = this;
-           
-
-
+            Punish = BlowJobType.Punish;
         }
+
+
+    
 
         public void AddSucks(int sucks)
         {

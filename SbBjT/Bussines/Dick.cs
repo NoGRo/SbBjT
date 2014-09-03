@@ -37,11 +37,15 @@ namespace SbBjT.Bussines
             if (lastStates == null )
                 lastStates = DickParts.ToDictionary(x => x.Name, x => x.IsIn);
 
-            
+
             foreach (DickPart dickPart in DickParts)
             {
                 if (!dickPart.IsIn)
                     dickPart.Name = dickPart.Name;
+                else
+                    dickPart.Name = dickPart.Name;
+                
+
                 if (lastStates[dickPart.Name] != dickPart.IsIn)
                 {
                     lastStates[dickPart.Name] = dickPart.IsIn;

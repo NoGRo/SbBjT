@@ -10,6 +10,30 @@ namespace SbBjT.Bussines.BlowJobCore
         BlowJob BlowJob { get; set; }
         PartName NextDo();
     }
+    public class Multi : IBlowJobBehavior
+    {
+        private IBlowJobBehavior[] behaviors;
+        public Multi(IBlowJobBehavior[] muls)
+        {
+            behaviors = muls;
+        }
+
+        public BlowJob BlowJob { get; set; }
+        public PartName NextDo()
+        {
+            
+           PartName max = PartName.Medium;
+
+            foreach (var blowJobBehavior in behaviors)
+            {
+                PartName b = blowJobBehavior.NextDo();
+                if (b > max)
+                    max = b;
+
+            }
+            return max;
+        }
+    }
 
     public class Every : IBlowJobBehavior
     {

@@ -174,14 +174,23 @@ namespace SbBjT
                             Rest= new Rest(){Have=false},
                             Speed = new Duration(3),
                             Sucks = new Duration(40),
-                            Behavior = new EveryRandom(3,10,PartName.Deep)
+                            Behavior = new Multi(new IBlowJobBehavior[]
+                                {
+                                        new EveryRandom(4, 10, PartName.Deep), 
+                                        new EveryRandom(1, 10, PartName.RealyDeep)
+                                }),
+                            Punish = new PunishSuckIncrease(blowJob,new Duration(2,5))
+
+                               
                         }
                 };
 
             blowJob = master.GetBlowJob();
-            //blowJob.Punish.Punishes.Add(new PunishSuckDo(blowJob,PartName.RealyDeep));
-            blowJob.Punish.Punishes.Add(new PunishSuckIncrease(blowJob,new Duration(1,5)));
-
+            blowJob.Punish = new PunishMulti( new IPunish[] {
+                                                    new PunishSuckIncrease(blowJob,new Duration(2,5)),
+                                                    new PunishSuckDo(blowJob,PartName.Deep) 
+                                                    });
+            
             blowJob.SuckLeftChange += BlowJobOnSuckLeftChange;
 
             blowJob.Start();
@@ -190,7 +199,13 @@ namespace SbBjT
 
         private void BlowJobOnSuckLeftChange(object sender, EventArgs eventArgs)
         {
-            //lblLeft.Text = blowJob.SucksLeft.ToString();
+          
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (blowJob != null)
+            lblLeft.Text = blowJob.SucksLeft.ToString();
         }
     }
     

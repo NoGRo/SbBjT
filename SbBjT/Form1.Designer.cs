@@ -29,10 +29,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.areaDetector1 = new SbBjT.Controls.AreaDetector();
             this.button1 = new System.Windows.Forms.Button();
             this.lblLeft = new System.Windows.Forms.Label();
+            this.areaDetector1 = new SbBjT.Controls.AreaDetector();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,20 +42,12 @@
             // 
             this.trackBar1.LargeChange = 1;
             this.trackBar1.Location = new System.Drawing.Point(12, 559);
-            this.trackBar1.Maximum = 20;
+            this.trackBar1.Maximum = 100;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(372, 45);
             this.trackBar1.TabIndex = 8;
             this.trackBar1.Value = 20;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            // 
-            // areaDetector1
-            // 
-            this.areaDetector1.Location = new System.Drawing.Point(12, 12);
-            this.areaDetector1.Name = "areaDetector1";
-            this.areaDetector1.Size = new System.Drawing.Size(654, 530);
-            this.areaDetector1.TabIndex = 7;
-            this.areaDetector1.Load += new System.EventHandler(this.areaDetector1_Load);
             // 
             // button1
             // 
@@ -71,8 +65,23 @@
             this.lblLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLeft.Location = new System.Drawing.Point(488, 559);
             this.lblLeft.Name = "lblLeft";
-            this.lblLeft.Size = new System.Drawing.Size(0, 73);
+            this.lblLeft.Size = new System.Drawing.Size(104, 73);
             this.lblLeft.TabIndex = 10;
+            this.lblLeft.Text = "00";
+            // 
+            // areaDetector1
+            // 
+            this.areaDetector1.Location = new System.Drawing.Point(12, 12);
+            this.areaDetector1.Name = "areaDetector1";
+            this.areaDetector1.Size = new System.Drawing.Size(654, 530);
+            this.areaDetector1.TabIndex = 7;
+            this.areaDetector1.Load += new System.EventHandler(this.areaDetector1_Load);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -100,6 +109,7 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblLeft;
+        private System.Windows.Forms.Timer timer1;
   
 
 

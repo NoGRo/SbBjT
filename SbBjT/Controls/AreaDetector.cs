@@ -52,25 +52,22 @@ namespace SbBjT.Controls
                 try
                 {
 
-
-
-                    Graphics gImg = Graphics.FromImage(Detector.CurrentFrame);
+                    Graphics g = pnlWebCam.CreateGraphics();
+                    g.DrawImage(Detector.CurrentFrame, 0, 0);
                     if (Detector.Detectors != null && Detector.Detectors.Count > 0)
                     {
+
+                        Detector.Paint = Paint;
+                        Detector.PaintColor = Color.Green;
                         Pen p = new Pen(Color.Black, 2);
+
                         foreach (ColorDetector colorDetector in Detector.Detectors)
                         {
-                            if (Paint)
-                                colorDetector.Paint(Color.Green);
-                            
-                            gImg.DrawRectangle(p, colorDetector.Area);
+                            g.DrawRectangle(p, colorDetector.Area);
                             
 
                         }
                    }
-                    gImg = null;
-                    Graphics g = pnlWebCam.CreateGraphics();
-                    g.DrawImage(Detector.CurrentFrame, 0, 0);
                 }
                 catch (Exception)
                 {
@@ -195,16 +192,32 @@ namespace SbBjT.Controls
 
             if (Pickcolor)
             {
-                Detector.Detectors.ForEach(x => x.Color = picColor.GetPixel(e.X, e.Y));
+                Color colSelect = new Color();
+                ok = false;
+                while (!ok)
+                    try
+                    {
+                        colSelect = picColor.GetPixel(e.X, e.Y);
+                        ok = true;
+                    }
+                    catch (Exception) { }
+
+                Detector.Detectors.ForEach(x => x.Color = colSelect);
                 btnPick.Enabled = true;
                 Pickcolor = false;
                 return;
             }
             var cd = currentColorDetector;
-       
-           
 
-            cd.Color = picColor.GetPixel(cd.Area.X + cd.Area.Width / 2, cd.Area.Y + cd.Area.Height / 2);    
+
+            ok = false;
+            while (!ok)
+                try{
+                    cd.Color = picColor.GetPixel(cd.Area.X + cd.Area.Width / 2, cd.Area.Y + cd.Area.Height / 2);    
+                    ok = true;
+                }catch (Exception){}
+            
+           
             
 
 

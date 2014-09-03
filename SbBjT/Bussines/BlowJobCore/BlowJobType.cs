@@ -8,7 +8,7 @@ namespace SbBjT.Bussines.BlowJobCore
  
 
         public bool RandomizePunishes { get; set; }
-        public PunishMulti Punish { get; set; }
+        public IPunish Punish { get; set; }
         public IBlowJobBehavior Behavior { get; set; }
         
         public Rest Rest { get; set; }
